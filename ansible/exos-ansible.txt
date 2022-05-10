@@ -1,0 +1,14 @@
+*** exos ansible ***
+
+1. Rédiger au choix la v1 ou la v2 d'un playbook qui:
+
+v1
+- installe nodejs
+- git clone le dépôt suivant: https://gitlab.com/cdufour1/nodeapp.git
+- exécute le fichier script.js en redirigeant la sortie sur un fichier output.txt
+
+v2
+- installe nodejs et npm
+- git clone le dépôt suivant: https://gitlab.com/cdufour1/nodeapp.git
+- installe les dépendances (commande npm install depuis le dossier contenant le fichier package.json)
+- exécute le fichier app.js
