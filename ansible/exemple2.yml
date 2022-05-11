@@ -1,0 +1,17 @@
+- name: Exemple 2
+  hosts: slaves
+  tasks:
+  - name: Demo file module
+    file:
+      path: /tmp/hello.txt
+      mode: '777'
+  - name: Demo file module 2
+    file:
+      path: /tmp/coucou.txt
+      mode: '400'
+      state: touch
+  - name: Demo file module 3
+    file:
+      path: /tmp/myfolder
+      mode: '744'
+      state: directory    

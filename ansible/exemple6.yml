@@ -1,0 +1,27 @@
+- name: Exemple 6
+  hosts: slaves
+
+  tasks:
+  - debug: var=ansible_distribution # variable fournie par le gather_facts
+
+  - name: Installe apache pour Ubuntu
+    apt:
+      name: apache2
+      state: present
+    become: yes
+    when: ansible_distribution=='Ubuntu'
+
+  - name: Installe apache pour CentOs
+    yum:
+      name: httpd
+      state: present
+    become: yes
+    when: ansible_distribution=='CentOS'
+
+  - name: Démarrage d'apache pour CentOs
+    service:
+      name: httpd
+      state: started
+    become: yes
+    when: ansible_distribution=='CentOS'
+

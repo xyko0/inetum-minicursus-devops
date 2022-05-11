@@ -1,0 +1,12 @@
+- name: Exemple 1
+  hosts: all
+  tasks:
+  - name: Demo copy module
+    copy:
+      src: files/hello.txt
+      dest: /tmp/hello.txt
+      mode: u=rw,g=r,o=r
+  - name: Demo copy module bis
+    copy:
+      src: files/bye.txt
+      dest: /tmp

@@ -1,0 +1,17 @@
+- name: Exo 1 version 1
+  hosts: slaves
+  gather_facts: no
+
+  tasks:
+  - name: Installe nodejs
+    become: yes
+    apt:
+      name: nodejs
+      update_cache: yes
+      state: present
+  - name: Git clonage
+    git:
+      repo: https://gitlab.com/cdufour1/nodeapp.git
+      dest: ~/nodeapp
+  - name: Exécute script
+    shell: node nodeapp/script.js > output.txt

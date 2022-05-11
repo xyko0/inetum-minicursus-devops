@@ -1,0 +1,30 @@
+- name: Exemple 10
+  hosts: slaves
+  gather_facts: yes
+  vars:
+    apache_dir: /var/www/html
+    user: inetum
+
+  tasks:
+
+  - name: Récupère les stats du chemin {{ apache_dir }}
+    stat:
+      path: '{{ apache_dir }}'
+    register: st
+
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/stat_module.html#return-values
+  - debug: var=st.stat.exists
+
+  - name: Attribution de droits à {{ user }} sur {{ apache_dir }}
+    file:
+      path: '{{ apache_dir }}'
+      owner: '{{ user }}'
+      group: '{{ user }}'
+    become: yes
+    when: st.stat.exists # que si le chemin existe
+
+  - name: Génére des fichiers HTML
+    template: 
+      src: templates/facts.html.j2
+      dest: '{{ apache_dir }}/{{ inventory_hostname }}.html'
+

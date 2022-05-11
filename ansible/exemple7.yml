@@ -1,0 +1,13 @@
+- name: Exemple 7
+  hosts: slaves
+  gather_facts: no
+  vars:
+    foo: bar
+    server: apache2
+
+  tasks:
+  - debug: var=foo
+  - name: Installe le serveur {{ server }}
+    apt: 
+      name: '{{ server }}' 
+      state: present

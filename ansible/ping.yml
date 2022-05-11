@@ -1,0 +1,8 @@
+# Playbook de démo d'utilisation du module ping
+- name: Ping demo
+  hosts: slaves
+  tasks:
+  - name: Task 1
+    ping:
+  - debug: var=ansible_distribution_major_version
+

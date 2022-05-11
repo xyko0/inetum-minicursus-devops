@@ -1,0 +1,13 @@
+- name: Copy and exec
+  hosts: slaves
+
+  tasks:
+  - name: Copie le scrit bash
+    copy:
+      src: files/script1.sh
+      dest: ~/script1.sh
+      mode: '744'
+  - name: Exécute le script
+    shell: ./script1.sh
+    register: exec_out
+  - debug: var=exec_out.stdout

@@ -1,0 +1,17 @@
+- name: Exemple 3
+  hosts: slaves
+  #become: yes # devenir root pour l'ensemble des tâches
+  gather_facts: yes
+  tasks:
+  - name: Demo Package Manager (apt)
+    become: yes
+    apt:
+      name: apache2
+      state: present
+    when: ansible_distribution=='Ubuntu'
+  - name: Demo Package Manager (yum)
+    become: yes
+    yum:
+      name: httpd
+      state: present
+    when: ansible_distribution=='CentOS'

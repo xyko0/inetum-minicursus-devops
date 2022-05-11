@@ -1,0 +1,24 @@
+- name: Exemple 8
+  hosts: slaves
+  gather_facts: no
+  vars:
+    # tableau d'objets
+    packages:
+    - name: apache2
+      state: present
+    - name: git
+      state: present
+    - name: nodejs
+      state: present
+
+
+  tasks:
+  - debug: var=packages[0]
+  - name: Installe les paquets
+    apt:
+      name: '{{ item.name }}'
+      state: '{{ item.state }}'
+    become: yes
+    loop: '{{ packages }}'
+
+    

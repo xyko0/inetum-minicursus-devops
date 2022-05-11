@@ -1,0 +1,7 @@
+slave1 ansible_host=192.168.1.121 ansible_user=inetum ansible_password=inetum ansible_sudo_pass=inetum
+slave2 ansible_host=192.168.1.122 ansible_user=inetum ansible_ssh_private_key=~/.ssh/id_rsa ansible_sudo_pass=inetum
+slave3 ansible_host=192.168.1.123 ansible_user=osboxes ansible_ssh_private_key=~/.ssh/id_rsa ansible_sudo_pass=osboxes.org
+
+[slaves]
+slave1
+slave2

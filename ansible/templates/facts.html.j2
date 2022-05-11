@@ -1,0 +1,7 @@
+<h1>Machine {{ inventory_hostname }}</h1>
+<ul>
+  <li>OS: {{ ansible_distribution }}</li>
+  <li>Version: {{ ansible_distribution_version }}</li>
+  <li>Architecture: {{ ansible_architecture }}</li>
+  <li>Interfaces: {{ ansible_default_ipv4.alias }}</li>
+</ul>

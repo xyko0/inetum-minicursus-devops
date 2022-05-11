@@ -1,0 +1,22 @@
+- name: Exemple 5
+  hosts: slaves
+  gather_facts: no
+
+  tasks:
+  - name: x1
+    command: pwd
+    register: x1_out
+  
+  - debug: var=x1_out.stdout
+
+  - name: x2
+    command: ls -l
+    register: x2_out
+
+  - debug: var=x2_out.stdout
+
+  - name: x3
+    shell: ls -l | wc -l
+    register: x3_out
+
+  - debug: var=x3_out.stdout

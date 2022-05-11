@@ -1,0 +1,10 @@
+- name: Exemple 12
+  hosts: slaves
+
+  tasks:
+  - name: Récupère fichier depuis les slaves
+    fetch:
+      src: /tmp/coucou.txt
+      dest: /tmp/exemple12
+
+  
