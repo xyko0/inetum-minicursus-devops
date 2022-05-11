@@ -12,3 +12,11 @@ v2
 - git clone le dépôt suivant: https://gitlab.com/cdufour1/nodeapp.git
 - installe les dépendances (commande npm install depuis le dossier contenant le fichier package.json)
 - exécute le fichier app.js
+
+2. Créer un playbook qui:
+
+- désinstalle mariadb
+- installe mysql
+- télécharge le zip suivant: https://www.mysqltutorial.org/wp-content/uploads/2018/03/mysqlsampledatabase.zip
+- désarchive le fichier mysqlsampledatabase.zip
+- exécute le script mysqlsampledatabase.sql

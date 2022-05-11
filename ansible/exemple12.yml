@@ -2,9 +2,21 @@
   hosts: slaves
 
   tasks:
+  # - name: Récupère fichier depuis les slaves
+  #   fetch:
+  #     src: /tmp/coucou.txt
+  #     dest: /tmp/exemple12
+
   - name: Récupère fichier depuis les slaves
     fetch:
-      src: /tmp/coucou.txt
-      dest: /tmp/exemple12
+      src: /tmp/bye.txt
+      dest: /tmp/exemple12-{{ inventory_hostname }}
+      flat: yes
+
+  # fetch n'accepte le ciblage de dossier
+  # - name: Récupère fichier depuis les slaves
+  #   fetch:
+  #     src: /tmp
+  #     dest: /tmp/exemple12-tmp
 
   

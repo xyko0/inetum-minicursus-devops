@@ -1,0 +1,13 @@
+# Playbook de démo d'utilisation d'un rôle
+- name: Démo Role
+  hosts: slave1
+  gather_facts: no
+  vars:
+    #foo: bar
+
+  roles:
+  - apache
+  - mysql
+
+  tasks:
+  - debug: var=package

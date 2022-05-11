@@ -1,0 +1,59 @@
+# Ce playbook 
+# - installe une pile (L)AMP (Apache Mysql/Mariadb Php)
+# - fait de la copie et sauvegarde conditionnelle de fichier
+# - crée un utilisateur avec ses permissions ssh
+- name: Projet 1
+  hosts: slave1
+  become: yes
+  vars:
+    apache_dir: /var/www/html
+
+  # import de la variable toto et se son password encryptés
+  vars_files:
+  - user_password.yml
+
+  tasks:
+
+  - debug: var=toto
+
+  - name: Installe AMP + drivers
+    apt: name={{ item }} state=present
+    loop: ['apache2', 'mariadb-server', 'php', 'php-mysql', 'libapache2-mod-php']
+
+  - name: Démarre apache et mariadb
+    service: name={{ item }} state=started
+    loop: ['apache2', 'mariadb']
+
+  - name: Copie index.php
+    copy:
+      src: files/index.php
+      dest: '{{ apache_dir }}'
+
+  - name: Récupère les stats de index.html
+    stat:
+      path: '{{ apache_dir }}/index.html'
+    register: st
+
+  - name: Sauvegarde index.html
+    copy:
+      remote_src: yes
+      src: '{{ apache_dir }}/index.html'
+      dest: '{{ apache_dir }}/index.html.bak'
+    when: st.stat.exists # backup que si le fichier existe
+
+  - name: Supprime index.html
+    file:
+      path: '{{ apache_dir }}/index.html'
+      state: absent
+
+  - name: Crée un compte utilisateur
+    user:
+      name: toto
+      group: sudo
+      shell: /bin/bash
+      password: "{{ toto | password_hash('sha512') }}"
+
+  - name: Transmet une clé rsa public
+    authorized_key:
+      user: toto
+      key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

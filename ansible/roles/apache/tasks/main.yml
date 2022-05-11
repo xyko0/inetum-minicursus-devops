@@ -1,0 +1,5 @@
+- name: Installe {{ package }} --- {{ foo }}
+  apt: name={{ package }} state=present
+
+- name: Démarre le service {{ package }}
+  service: name={{ package }} state=started
